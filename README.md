@@ -328,7 +328,7 @@ The ATRIB statement should be used in place of format or length statements becau
 
 ## DATEs/DATETIMEs  
 
-**SAS does NOT have any notion of a date or datetime: that is very important to understand.** What you perceive as a date is the number of days since Jan 1, 1960 (SAS epochal date). Datetime is number of seconds. All systems have epochal dates. Unix is Jan 1, 1970, Microsoft is Jan 1, 1900, Mac is slightly weird (1904), SQL Server has one in the 1700s, etc. That allows adding/subtracting of dates. Same way the Mayans did it (history trivia here).  
+**SAS does NOT have any notion of a date or datetime variable type: that is very important to understand.** What you perceive as a date is the number of days since Jan 1, 1960 (SAS epochal date). Datetime is number of seconds. All systems have epochal dates. Unix is Jan 1, 1970, Microsoft is Jan 1, 1900, Mac is slightly weird (1904), SQL Server has one in the 1700s, etc. That allows adding/subtracting of dates. Same way the Mayans did it (history trivia here).  
 
 - When you format a date, you merely put a mask on it for viewing. An informat deciphers a mask and converts the perceived date to a number representing the number of days since Jan 1, 1960 (plus or minus). A format displays it. **IN**format vs format. Hence, 24 is a date to SAS. So is 6000\. What you choose to display to the user is a date format. Sept 22, 2020 is a number to SAS (see below). If you want to add 2 dates, you can. Any arithmetic with dates works. Want to add a day to a datetime? Sure, 86400 seconds in a day. Add it to a ‘datetime’ in SAS and it works. Here, SAS shows what the value is for today:
 
