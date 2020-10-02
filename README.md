@@ -924,7 +924,7 @@ The SAS DMS window can easily overflow with log data. Avoid that by saving the l
 <div>
 
 <pre>      	ods results=off;
-      	filename outFFile = 'c:\temp\sasCodeRun.log';
+      	filename outFile = 'c:\temp\sasCodeRun.log';
 
         proc printto log=outFile print=outFile new;
         run;
