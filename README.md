@@ -134,6 +134,8 @@ Tips and tricks learned over 20+ years as a SAS/Microsoft consultant
 
  - [Advanced Concepts](#advanced-concepts)
 
+   - [_N_](#_N_)
+
    - [Hash Objects](#hash-objects)
 
      - [Simple example ( direct from Paul Dorfman’s paper. See Appendix: References)](#simple-example--direct-from-paul-dorfmans-paper-see-appendix-references)
