@@ -1086,6 +1086,10 @@ For command line, to use the above autoexec options, or to add more/modify them,
 
 # Advanced Concepts
 
+## _N_
+
+[From user posting online] It is worth noting that _n_ is not the observation number (although it often matches the observation number in many DATA steps).  It is actually a counter, counting the number of times that the programming logic has left the DATA statement in order to execute the remaining statements within the DATA step.  Understanding _n_ requires a solid understanding of how DATA steps work.
+
 ## Hash Objects
 
 **[2020 NOTE: SAS is deemphasizing DS2 and it has no path forward. It is not recommended at this time.]** Hash objects are part of the DS2 language in SAS. They are an extension of the data step. Hash objects can dramatically improve performance of some SAS programs. However, they can also be detrimental if not used properly. Generally speaking, a hash object works best when a small table needs to be merged against a larger table. The time taken to load the hash table into memory is the key constraint along with having enough memory to do the hash. The below is a simple example of a match-merge using a hash object with resources linking to more comprehensive reading on the subject.
