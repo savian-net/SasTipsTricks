@@ -97,6 +97,7 @@ Tips and tricks learned over 20+ years as a SAS/Microsoft consultant
    - [Scope](#scope)
 
    - [Check if dataset exists](#check-if-dataset-exists)
+   - [Save macros ](#save-macros)
 
  - [Other](#other)
 
@@ -913,8 +914,10 @@ Tip from macro guru: _However, as a macro instructor, what I tell students in ev
     %put Made It;
 </pre>
 
-## Save macros (from SAS website)
+## Save macros 
 
+	From SAS website:
+	
 	/* Place the GLOBAL macro variable(s) into a permanent SAS data set.  */ 
 
 	libname test ".";
