@@ -913,6 +913,30 @@ Tip from macro guru: _However, as a macro instructor, what I tell students in ev
     %put Made It;
 </pre>
 
+## Save macros (from SAS website)
+
+	/* Place the GLOBAL macro variable(s) into a permanent SAS data set.  */ 
+
+	libname test ".";
+
+	data test.vars;                                                                                                                             
+	   set sashelp.vmacro(where=(scope='GLOBAL'));                                                                                         
+	run;                                                                                                                                   
+
+	/* Submit the following in a subsequent SAS session:  */
+
+	libname test ".";
+
+	/* Place the macro variable(s) back into the GLOBAL symbol table. */
+	data _null_;                                                                                                                           
+	   set test.vars(where=(scope='GLOBAL'));                                                                                                   
+	   if substr(name,1,3) ne 'SYS' then do;                                                                                               
+	      call execute('%global '||strip(name)||';');                                                                                   
+	      call execute('%let '||strip(name)||'='||strip(value)||';');                                                             
+	   end;                                                                                                                                 
+	run;   
+
+
 # Other
 
 ## Read the logs
