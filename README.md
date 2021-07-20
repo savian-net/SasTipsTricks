@@ -914,6 +914,15 @@ Tip from macro guru: _However, as a macro instructor, what I tell students in ev
     %put Made It;
 </pre>
 
+## Save work data to perm location
+	
+<pre>
+libname permdata v9 'c:\temp';
+proc copy in=work out=permdata memtype=data;
+run;
+[Thanks to KSharp on SAS Community]
+</pre>
+	
 ## Save macros 
 
 	From SAS website:
