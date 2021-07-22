@@ -1269,6 +1269,38 @@ We will be using the following code as a sample. Whether it is test1.sas or test
 
 </div>
 
+### PROC HTTP
+
+	<pre>
+	/*===================================================
+| USAGE: OPERATIONAL CURL
+| -----------------------------------------------------
+|
+| curl --location --request POST 'http://localhost:9003/Email/SendEmailAsync?toAddresses=first.last%40gmail.com&subject=TestEmail' \
+| --header 'accept: text/plain' \
+| --header 'Content-Type: multipart/form-data' \
+| --form 'files=@"/E:/temp/message.html"' \
+| --form 'files=@"/E:/temp/report.xlsx"'
+*====================================================*/
+ 
+filename xcl "E:\temp\report.xlsx";
+filename input "E:\temp\message.html";
+filename debug "e:\temp\SasHttp.txt";
+ 
+proc http 
+   url="http://server01:9003/Email/SendEmailAsync"
+   query = ("toAddresses"="first.last@gmail.com"
+            "subject"="SAS Email")
+   headerout=debug
+   method="POST"
+   in = multi FORM ( "message.html" = input header="Content-Type: text/html",
+                     "report.xlsx" = xcl header="Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+                   );  
+   * DEBUG LEVEL=3;
+run;
+
+	</pre>
+	
 # Appendix: Tips
 
 ## Software Suggestions
