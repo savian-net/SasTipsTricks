@@ -153,7 +153,7 @@ Tips and tricks learned over 20+ years as a SAS/Microsoft consultant
 
      - [Windows](#windows)
 
-  - [PROC HTTP](#prochttp)
+  - [PROC HTTP](#proc-http)
 
  - [Appendix: Tips](#appendix-tips)
 
@@ -1269,7 +1269,7 @@ We will be using the following code as a sample. Whether it is test1.sas or test
 
 </div>
 
-(#prochttp)### PROC HTTP
+### PROC HTTP
 
 	<pre>
 	/*===================================================
