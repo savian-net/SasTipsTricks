@@ -84,8 +84,8 @@ Tips and tricks learned over 20+ years as a SAS/Microsoft consultant
 
  - [Dynamic Code](#dynamic-code)
 
-   - [CodeGen](#sas-dictionary-library)
-
+   - [CodeGen](#codegen)
+     
    - [SAS Dictionary library](#sas-dictionary-library)
 
    - [PUT Statements vs Macros](#put-statements-vs-macros)
