@@ -84,6 +84,8 @@ Tips and tricks learned over 20+ years as a SAS/Microsoft consultant
 
  - [Dynamic Code](#dynamic-code)
 
+   - [CodeGen](#sas-dictionary-library)
+
    - [SAS Dictionary library](#sas-dictionary-library)
 
    - [PUT Statements vs Macros](#put-statements-vs-macros)
@@ -795,6 +797,76 @@ CHARTYPE option allows proc summary to output a string that indicates what the c
 </div>
 
 # Dynamic Code
+
+## CodeGen
+
+Use the idea of CodeGen (using PUT statements and then %including)
+
+<pre>
+    data _null_; *data TEST ;
+        file &CgFinalFilename. ;
+        set &refTable. end=eof; %* work file is the new date-scrubbed copy;
+
+        * Build out Select When Statement from preliminary codegen file and Reference data;
+        if _n_ = 1 then
+            put @1 'SELECT; ';
+        put   /@5 'WHEN (';
+        %include &CgConditionFilename. ; *Conditions logical condition;
+        put   @10 ') '; *Ends When statement;
+        * Create output statement;
+        put
+              @9  'DO;'
+            / @13 'codeGenMatchCondition = ' _N_ ';'
+        ; *Closes put statement;
+          
+            %do i = 1 %to &numValues.;
+                %if &&outVartype&i.. = 1 %then 
+	                %do;
+	                    put @13 "&&outVar&i.. = " &&outVar&i.. ';'; %* left side is variable name, right side is value;
+	                %end;
+                %else %if &&outVartype&i.. = 2 %then 
+	                %do;
+	                    %* left side is variable name, right side is value;
+	                    if &&outVar&i..='' then put @13 "&&outVar&i.. = '" &&outVar&i.. +(-2) "';";
+	                    else put @13 "&&outVar&i.. = '" &&outVar&i.. +(-1) "';";
+	                %end;
+
+            %end;  %* End numValues Loop;     
+
+        put
+           / @9 'END;'
+            ; *Ends Output put statement;
+
+        * On last row, create otherwise statement, setting output values to null;
+        if eof then
+        do ;
+            put 
+                /@5  'OTHERWISE'
+                /@9  'DO; '   
+                /@13 'codeGenMatchCondition=-99999; '
+                  
+
+            %do i = 1 %to &numValues.;
+            
+            %if &&outVartype&i.. = 1 %then %do;
+                    / @13 "&&outVar&i.. = .;"
+                %end;
+                %else %if &&outVartype&i.. = 2 %then %do;
+                    / @13 "&&outVar&i.. = '';" 
+                %end;                
+            %end; %* end numValues Loop;
+            ;
+
+            put  
+                 @9 'END; '   
+                /@1 'END;' 
+            ;
+        end; *End eof Do;
+
+    run; 
+
+</pre>
+
 
 ## SAS Dictionary library
 
